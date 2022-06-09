@@ -149,17 +149,18 @@
 <script>
     
     //import eth_logo from '../assets/eth_logo.png';
-    import metamask_logo from '../assets/metamask.png';
-    import connect_logo from '../assets/walletconnect.png';
-    import coinbase_logo from '../assets/coinbase_logo.png';
-    import ava_logo from "../assets/ava.png";
-    import sol_logo from "../assets/sol.png";
+    import metamask_logo from '/metamask.png';
+    import connect_logo from '/walletconnect.png';
+    import coinbase_logo from '/coinbase_logo.png';
+    import eth_logo from "/eth_logo.png";
+    import ava_logo from "/ava.png";
+    import sol_logo from "/sol.png";
     import Select from 'svelte-select';
 
     let items = [
-        {value: 'ethereum', label: '<img src="/src/assets/eth_logo.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Ethereum'},
-        {value: 'avalanche', label: '<img src="/src/assets/ava.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Avalanche'},
-        {value: 'solana', label: '<img src="/src/assets/sol.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Solana'},
+        {value: 'ethereum', label: `<img src="/eth_logo.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Ethereum`},
+        {value: 'avalanche', label: '<img src="/ava.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Avalanche'},
+        {value: 'solana', label: '<img src="/sol.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Solana'},
     ];
 
 

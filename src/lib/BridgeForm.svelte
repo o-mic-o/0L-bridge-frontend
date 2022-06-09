@@ -125,21 +125,21 @@
 </div>
 
 <script>
-    import switcher from '../assets/switcher.png';
-    import ol_icon from '../assets/icon.jpg';
-    import eth_logo from '../assets/eth_logo.png';
+    import switcher from '/switcher.png';
+    import ol_icon from '/icon.jpg';
+    import eth_logo from '/eth_logo.png';
 
     import Select from 'svelte-select';
     function q(e) { return document.querySelector(e); };
 
     let items = [
-        {value: 'ethereum', label: '<img src="/src/assets/eth_logo.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Ethereum'},
-        {value: 'avalanche', label: '<img src="/src/assets/ava.png" style="width:20px;padding-right:5px;" alt="AVA Logo"/>Avalanche'},
-        {value: 'solana', label: '<img src="/src/assets/sol.png" style="width:20px;padding-right:5px;" alt="Solana Logo"/>Solana'},
+        {value: 'ethereum', label: '<img src="/eth_logo.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Ethereum'},
+        {value: 'avalanche', label: '<img src="/ava.png" style="width:20px;padding-right:5px;" alt="AVA Logo"/>Avalanche'},
+        {value: 'solana', label: '<img src="/sol.png" style="width:20px;padding-right:5px;" alt="Solana Logo"/>Solana'},
     ];
 
     let to_items = [
-        {value: '0l', label: '<img src="/src/assets/icon.jpg" style="width:20px;padding-right:5px;" alt="0L Logo"/>0L Network'}
+        {value: '0l', label: '<img src="/icon.jpg" style="width:20px;padding-right:5px;" alt="0L Logo"/>0L Network'}
     ];
     let to_selected = to_items[0];
 

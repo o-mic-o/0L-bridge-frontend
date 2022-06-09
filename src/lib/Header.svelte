@@ -51,7 +51,7 @@ h1 {
 
 <script>
     import { navigateTo } from 'svelte-router-spa'
-    import logo from '../assets/icon.jpg';
+    import logo from '/icon.jpg';
     export let current_tab_focus = "/bridge";
     import ConnectWalletButton from './ConnectWalletButton.svelte'
 
