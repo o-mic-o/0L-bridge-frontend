@@ -62,10 +62,16 @@
       width:25px;
   }
   .chain-type-container{
-    padding:10px 0 10px 30px;
-    display:flex;
-    align-items:center;
-    justify-content: flex-start;
+    width:340px;
+    padding:25px 0 25px 30px;
+    text-align: left;
+    font-size:18px;
+    color:black;
+    --borderRadius: 10px;
+    --itemIsActiveBG: #e7f9ff;
+    --itemHoverColor: black;
+    --itemHoverBG: #e7f9ff;
+    --itemIsActiveColor: black;
   }
   .chain-type-container img {
     width:40px;
@@ -88,6 +94,7 @@
     width:20px;
     padding-right:10px;
  }
+
 </style>
 
 <div style="display:relative;">
@@ -102,13 +109,12 @@
         <div class="divider"></div>
         
         <div class="chain-type-container">
-            <img src={eth_logo} alt="Ethereum Logo" />
-            <div class="chain-type">Ethereum network</div>
+            <Select {items} showChevron={true} on:select={handleSelect} inputStyles="cursor:pointer;" placeholder="Select the network to connect to..."></Select>
         </div>
         
-        <div class="divider"></div>
+        <div class="chain-divider divider hide"></div>
 
-        <div class="selections-eth">
+        <div class="selections-eth hide">
             <div on:click={connect_metamask} class="chain-wallet-container">
                 <img src={metamask_logo} alt="Metmask Logo" />
                 <div class="wallet-type">Metamask</div>
@@ -122,23 +128,70 @@
                 <div class="wallet-type">Coinbase Wallet</div>
             </div>
         </div>
+
+        <div class="selections-ava hide">
+            <div on:click={connect_ava} class="chain-wallet-container">
+                <img src={ava_logo} alt="Ava Logo" />
+                <div class="wallet-type">AVA Connect</div>
+            </div>
+        </div>     
+
+        <div class="selections-sol hide">
+            <div on:click={connect_sol} class="chain-wallet-container">
+                <img src={sol_logo} alt="Solana Logo" />
+                <div class="wallet-type">Solana Connect</div>
+            </div>
+        </div>    
+
     </div>
 </div>
 
 <script>
     
-    import eth_logo from '../assets/eth_logo.png';
+    //import eth_logo from '../assets/eth_logo.png';
     import metamask_logo from '../assets/metamask.png';
     import connect_logo from '../assets/walletconnect.png';
     import coinbase_logo from '../assets/coinbase_logo.png';
+    import ava_logo from "../assets/ava.png";
+    import sol_logo from "../assets/sol.png";
+    import Select from 'svelte-select';
+
+    let items = [
+        {value: 'ethereum', label: '<img src="/src/assets/eth_logo.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Ethereum'},
+        {value: 'avalanche', label: '<img src="/src/assets/ava.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Avalanche'},
+        {value: 'solana', label: '<img src="/src/assets/sol.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Solana'},
+    ];
+
+
+    function handleSelect(event) {
+        console.log('selected item', event.detail.value);
+        if (event.detail.value == "ethereum") {
+            q(".selections-eth").classList.remove("hide");
+            q(".chain-divider").classList.remove("hide");
+            q(".selections-sol").classList.add("hide");
+            q(".selections-ava").classList.add("hide");
+        } else if (event.detail.value == "avalanche") {
+            q(".selections-ava").classList.remove("hide");
+            q(".selections-eth").classList.add("hide");
+            q(".selections-sol").classList.add("hide");
+            q(".chain-divider").classList.remove("hide");
+        }  else if (event.detail.value == "solana") {
+            q(".selections-ava").classList.add("hide");
+            q(".selections-sol").classList.remove("hide");
+            q(".selections-eth").classList.add("hide");
+            q(".chain-divider").classList.remove("hide");
+        } else {
+            q(".selections-eth").classList.add("hide");
+            q(".selections-sol").classList.add("hide");
+            q(".selections-ava").classList.add("hide");
+            q(".chain-divider").classList.add("hide");
+        }
+    }
+
     function q(incoming) { return document.querySelector(incoming); };
 
-       /* if (!load_once) {
-        setTimeout(function() {
-            check_for_web3();
-            load_once = true;
-        },500);*/
-   check_for_web3();
+
+   //check_for_web3(); // Enable for metamask
 
     async function check_for_web3() {
         if (typeof window.ethereum != 'undefined') {
@@ -181,6 +234,14 @@
             q("#connect-container").classList.add("hide");
         }
     }
+
+    async function connect_ava() {
+        alert("connecting to ava.");
+    };
+
+    async function connect_sol() {
+        alert("Connecting to sol.");
+    };
 
     function wallet_connect_connection() {
         alert("Wallet connect connection.");
