@@ -5,7 +5,7 @@
     font-weight: 600;
     line-height: 1.1;
     margin: 0;
-    padding:50px 0 25px 0;
+    padding:100px 0 25px 0;
     font-family: 'CircularStd-Bold';
   }
   p {

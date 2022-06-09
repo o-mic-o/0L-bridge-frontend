@@ -72,6 +72,7 @@
     --itemHoverColor: black;
     --itemHoverBG: #e7f9ff;
     --itemIsActiveColor: black;
+    --inputFontSize: 18px;
   }
   .chain-type-container img {
     width:40px;
@@ -90,17 +91,13 @@
     align-items: center;
     justify-content: center;
   }
- #connect-button-logo img {
-    width:20px;
-    padding-right:10px;
- }
 
 </style>
 
 <div style="display:relative;">
     <div on:click={connect_button_process} id="connect-button" data-typeid="connect" class="connect-button connect-button-flex">
         <div id="connect-button-logo" class="hide">
-            <img src={metamask_logo} alt="Metmask Logo" />
+           
         </div>
         <div id="connect-button-text">Connect Wallet</div>
     </div>
@@ -109,7 +106,7 @@
         <div class="divider"></div>
         
         <div class="chain-type-container">
-            <Select {items} showChevron={true} on:select={handleSelect} inputStyles="cursor:pointer;" placeholder="Select the network to connect to..."></Select>
+            <Select {items} showChevron={true} on:select={handleSelect} inputStyles="cursor:pointer;" placeholder="Select network..."></Select>
         </div>
         
         <div class="chain-divider divider hide"></div>
@@ -157,9 +154,14 @@
     import sol_logo from "/sol.png";
     import Select from 'svelte-select';
 
+    let chain_id_mapping = [
+        ["0x1", "eth_logo"],
+        ["0xa86a", "ava"]
+    ];
+
     let items = [
-        {value: 'ethereum', label: `<img src="/eth_logo.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Ethereum`},
         {value: 'avalanche', label: '<img src="/ava.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Avalanche'},
+        {value: 'ethereum', label: `<img src="/eth_logo.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Ethereum`},
         {value: 'solana', label: '<img src="/sol.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Solana'},
     ];
 
@@ -190,25 +192,18 @@
     }
 
     function q(incoming) { return document.querySelector(incoming); };
-
-
-   //check_for_web3(); // Enable for metamask
-
-    async function check_for_web3() {
-        if (typeof window.ethereum != 'undefined') {
-            let this_selected_address = await window.ethereum.selectedAddress;
-            if (this_selected_address == null) {
-                console.log("Disconnected");
-            } else {
-                connect_metamask();
-            }
-        }
-    };
     
     async function connect_button_process() {
+
         if (typeof window.ethereum != 'undefined' && window.ethereum.selectedAddress) {
-            load_metmask_as_title();
-        } 
+            if (typeof window.web3.currentProvider != 'undefined') {    
+                for (var i=0; i < chain_id_mapping.length; i++) {
+                    if (window.web3.currentProvider.chainId == chain_id_mapping[i][0]) {
+                        load_metmask_as_title(chain_id_mapping[i][1]);
+                    }
+                }
+            }
+        }
 
         let this_connect_container = q("#connect-container");
         if (this_connect_container.classList.contains("hide")) {
@@ -219,10 +214,11 @@
     }
     
 
-    async function load_metmask_as_title() {
+    async function load_metmask_as_title(type) {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const account = accounts[0];
         q("#connect-button").classList.add("connect-button-flex");
+        q("#connect-button-logo").innerHTML = '<img src="/'+type+'.png" alt="Metmask Logo" style="width:20px;padding-right:10px;"/>';
         q("#connect-button-logo").classList.remove("hide");
         q("#connect-button-text").classList.add("truncate-address");
         q("#connect-button-text").innerHTML = account;
@@ -231,13 +227,32 @@
     async function connect_metamask() {
         if (typeof window.ethereum !== 'undefined') {
             console.log('MetaMask is installed!');
-            load_metmask_as_title();
+            load_metmask_as_title("eth_logo");
             q("#connect-container").classList.add("hide");
         }
     }
 
     async function connect_ava() {
-        alert("connecting to ava.");
+        const AVALANCHE_MAINNET_PARAMS = {
+            chainId: '0xA86A',
+            chainName: 'Avalanche Mainnet C-Chain',
+            nativeCurrency: {
+                name: 'Avalanche',
+                symbol: 'AVAX',
+                decimals: 18
+            },
+            rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
+            blockExplorerUrls: ['https://snowtrace.io/']
+        };
+        if (typeof window.ethereum !== 'undefined') {
+            window.ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [AVALANCHE_MAINNET_PARAMS]
+            }).then(() => {
+                load_metmask_as_title("ava");
+                q("#connect-button").click();
+            });
+        }
     };
 
     async function connect_sol() {

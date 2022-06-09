@@ -70,7 +70,7 @@ h1 {
     }
 </script>
 
-<div>
+<div style="position:fixed;width:100%;">
     <div class="main-header">
         <div class="normal-flex">
             <img on:click = { check_header_tabs } data-typeid="bridge" src={logo} alt="0L Logo" class="cursor"/>
