@@ -26,29 +26,27 @@
 </style>
 
 <div id="bridge-tabs" class="bridge-tabs-container">
-    <div on:mouseover={check_bridge_tabs} on:focus={type_focusing} data-typeid="tokens" class="inner-tab tab-selected">Tokens</div>
-    <div on:mouseover={check_bridge_tabs} on:focus={type_focusing} data-typeid="nfts" class="inner-tab">NFTs</div>
-    <div on:mouseover={check_bridge_tabs} on:focus={type_focusing} data-typeid="redeems" class="inner-tab">Redeems</div>
+    <div on:click={check_bridge_tabs} data-typeid="tokens" class="inner-tab {current_tab_focus=="/bridge/tokens"?"tab-selected":""}">Tokens</div>
+    <div on:click={check_bridge_tabs} data-typeid="nfts" class="inner-tab {current_tab_focus=="/bridge/nfts"?"tab-selected":""}">NFTs</div>
+    <div on:click={check_bridge_tabs} data-typeid="redeems" class="inner-tab {current_tab_focus=="/bridge/redeems"?"tab-selected":""}">Redeems</div>
 </div>
 
 <script>
+    import { navigateTo } from 'svelte-router-spa'
     let type_currently_selected = "tokens";
-
-    function type_focusing() {}
-
+    export let current_tab_focus;
+   
     function check_bridge_tabs(e) { 
         // Handles tab switching and assigning current type selected
 
-        if (!e.srcElement.classList.contains("tab-selected")) {
-            let these_tabs = document.querySelectorAll("#bridge-tabs .inner-tab");
-            
-            for (var i = 0; i < these_tabs.length; i++) {
-                these_tabs[i].classList.remove("tab-selected");
-            }
-
-            type_currently_selected = e.srcElement.getAttribute("data-typeid");
-            e.srcElement.classList.add("tab-selected");
-            console.log(type_currently_selected);
+        let these_tabs = document.querySelectorAll("#bridge-tabs .inner-tab");
+        
+        for (var i = 0; i < these_tabs.length; i++) {
+            these_tabs[i].classList.remove("tab-selected");
         }
+
+        type_currently_selected = e.srcElement.getAttribute("data-typeid");
+        e.srcElement.classList.add("tab-selected");
+        navigateTo("/bridge/" + e.srcElement.getAttribute("data-typeid"));
     }
 </script>

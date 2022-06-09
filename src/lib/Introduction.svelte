@@ -6,6 +6,7 @@
     line-height: 1.1;
     margin: 0;
     padding:50px 0 25px 0;
+    font-family: 'CircularStd-Bold';
   }
   p {
     padding:0;
@@ -19,10 +20,16 @@
   }
 
 </style>
-  
+
+<script>
+
+    import '../assets/fonts.css';
+    export let title = "Token Bridge";
+    export let paragraph = "Welcome to the 0L Token Bridge! It's possible to swap between various other blockchain tokens to 0L using this bridge.";
+
+</script>
+
 <div>
-  <h1>Token Bridge</h1>
-  <p>
-    Welcome to the 0L Token Bridge! It's possible to swap between various other blockchain tokens to 0L using this bridge.
-  </p>
+  <h1>{title}</h1>
+  <p>{paragraph}</p>
 </div>
