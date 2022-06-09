@@ -6,6 +6,12 @@
     border-radius: 30px;
     margin-right:15px;
     cursor: pointer;
+    min-width:100px;
+}
+.connect-button.connect-button-flex {
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 .connect-button:hover {
     background-color: rgb(252, 127, 105);
@@ -70,11 +76,27 @@
     font-weight: 300;
     color:black;
   }
-
+  #connect-button-logo.hide {
+      display:none;
+  }
+  #connect-button-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+ #connect-button-logo img {
+    width:20px;
+    padding-right:10px;
+ }
 </style>
 
 <div style="display:relative;">
-    <div on:click={connect_button_process} id="connect-button" data-typeid="connect" class="connect-button">Connect Wallet</div>
+    <div on:click={connect_button_process} id="connect-button" data-typeid="connect" class="connect-button connect-button-flex">
+        <div id="connect-button-logo" class="hide">
+            <img src={metamask_logo} alt="Metmask Logo" />
+        </div>
+        <div id="connect-button-text">Connect Wallet</div>
+    </div>
     <div id="connect-container" class="connect-container hide">
         <div class="connect-title">Connect Wallet</div>
         <div class="divider"></div>
@@ -104,22 +126,60 @@
 </div>
 
 <script>
+    
     import eth_logo from '../assets/eth_logo.png';
     import metamask_logo from '../assets/metamask.png';
     import connect_logo from '../assets/walletconnect.png';
     import coinbase_logo from '../assets/coinbase_logo.png';
+    function q(incoming) { return document.querySelector(incoming); };
 
-    function connect_button_process() {
-        let this_connect_container = document.querySelector("#connect-container");
+       /* if (!load_once) {
+        setTimeout(function() {
+            check_for_web3();
+            load_once = true;
+        },500);*/
+   check_for_web3();
+
+    async function check_for_web3() {
+        if (typeof window.ethereum != 'undefined') {
+            let this_selected_address = await window.ethereum.selectedAddress;
+            if (this_selected_address == null) {
+                console.log("Disconnected");
+            } else {
+                connect_metamask();
+            }
+        }
+    };
+    
+    async function connect_button_process() {
+        if (typeof window.ethereum != 'undefined' && window.ethereum.selectedAddress) {
+            load_metmask_as_title();
+        } 
+
+        let this_connect_container = q("#connect-container");
         if (this_connect_container.classList.contains("hide")) {
-            document.querySelector("#connect-container").classList.remove("hide");
+            q("#connect-container").classList.remove("hide");
         } else {
-            document.querySelector("#connect-container").classList.add("hide");
+            q("#connect-container").classList.add("hide");
         }
     }
+    
 
-    function connect_metamask() {
-        alert("Metmask connection.");
+    async function load_metmask_as_title() {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const account = accounts[0];
+        q("#connect-button").classList.add("connect-button-flex");
+        q("#connect-button-logo").classList.remove("hide");
+        q("#connect-button-text").classList.add("truncate-address");
+        q("#connect-button-text").innerHTML = account;
+    };
+
+    async function connect_metamask() {
+        if (typeof window.ethereum !== 'undefined') {
+            console.log('MetaMask is installed!');
+            load_metmask_as_title();
+            q("#connect-container").classList.add("hide");
+        }
     }
 
     function wallet_connect_connection() {

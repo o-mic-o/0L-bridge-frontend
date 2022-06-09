@@ -6,7 +6,7 @@
     import { Route, navigateTo} from 'svelte-router-spa'
 
   export let currentRoute;
-  navigateTo("/bridge/tokens");
+  //navigateTo("/bridge/tokens");
 </script>
 
 <main>
