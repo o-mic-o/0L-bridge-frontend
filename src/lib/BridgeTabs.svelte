@@ -32,7 +32,7 @@
 </div>
 
 <script>
-    import { connected_account, connect_account_type, bridge_tab_selected} from './stores.js';
+    import { bridge_tab_selected} from './stores.js';
     import { navigateTo } from 'svelte-router-spa'
     export let type_currently_selected = "tokens";
     export let current_tab_focus;

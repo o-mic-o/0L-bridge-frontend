@@ -50,14 +50,14 @@ h1 {
 
 
 <script>
-    import { connected_account, connect_account_type, bridge_tab_selected} from './stores.js';
-    
+    import { bridge_tab_selected } from './stores.js';
+
     import { navigateTo } from 'svelte-router-spa'
     import logo from '/icon.jpg';
     export let current_tab_focus = "/bridge";
     import ConnectWalletButton from './ConnectWalletButton.svelte'
     let main_logo_navigation_directs_to = "/bridge/tokens";
-
+    
     bridge_tab_selected.subscribe(function(value) {
         if (value == "tokens") {
             main_logo_navigation_directs_to = "/bridge/tokens";

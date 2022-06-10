@@ -2,7 +2,6 @@
     import Introduction from './Introduction.svelte'
     import Header from './Header.svelte'
     import { Route } from 'svelte-router-spa'
-
     export let currentRoute;
     console.log(currentRoute);
 </script>

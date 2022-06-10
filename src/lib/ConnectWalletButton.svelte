@@ -147,7 +147,8 @@
 </div>
 
 <script>
-    
+    import { connected_account_address, is_connected_account, connect_account_type } from './stores.js';
+
     //import eth_logo from '../assets/eth_logo.png';
     import metamask_logo from '/metamask.png';
     import connect_logo from '/walletconnect.png';
@@ -167,7 +168,16 @@
         {value: 'ethereum', label: `<img src="/eth_logo.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Ethereum`},
         {value: 'solana', label: '<img src="/sol.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Solana'},
     ];
+    
+    parse_local_store();
 
+    function parse_local_store() {
+        is_connected_account.subscribe(function(is_connect){
+            if (is_connect) {
+                loading_web3_process(); 
+            }
+        });
+    };
 
     function handleSelect(event) {
         console.log('selected item', event.detail.value);
@@ -196,30 +206,47 @@
 
     function q(incoming) { return document.querySelector(incoming); };
     
-    async function connect_button_process() {
-
+    async function loading_web3_process() {
         if (typeof window.ethereum != 'undefined' && window.ethereum.selectedAddress) {
             if (typeof window.web3.currentProvider != 'undefined') {    
                 for (var i=0; i < chain_id_mapping.length; i++) {
                     if (window.web3.currentProvider.chainId == chain_id_mapping[i][0]) {
                         load_metmask_as_title(chain_id_mapping[i][1]);
+                        connect_account_type.update(function(value) {
+                            return chain_id_mapping[i][1];
+                        });
+                        is_connected_account.update(function(value_is){
+                            return true;
+                        });
                     }
                 }
             }
         }
 
+    };
+
+    async function connect_button_process() {
+        loading_web3_process();
+        hide_show_connect_container();
+    }
+    
+    function hide_show_connect_container() {
         let this_connect_container = q("#connect-container");
         if (this_connect_container.classList.contains("hide")) {
             q("#connect-container").classList.remove("hide");
         } else {
             q("#connect-container").classList.add("hide");
         }
-    }
-    
+    };
 
     async function load_metmask_as_title(type) {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const account = accounts[0];
+
+        connected_account_address.update(function(value){
+            return account;
+        });
+
         q("#connect-button").classList.add("connect-button-flex");
         q("#connect-button-logo").innerHTML = '<img src="/'+type+'.png" alt="Metmask Logo" style="width:20px;padding-right:10px;"/>';
         q("#connect-button-logo").classList.remove("hide");
