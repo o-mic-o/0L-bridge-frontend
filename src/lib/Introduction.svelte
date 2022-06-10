@@ -5,7 +5,7 @@
     font-weight: 600;
     line-height: 1.1;
     margin: 0;
-    padding:100px 0 25px 0;
+    padding:50px 0 25px 0;
     font-family: 'CircularStd-Bold';
   }
   p {
@@ -22,11 +22,9 @@
 </style>
 
 <script>
-
     import '../assets/fonts.css';
     export let title = "Token Bridge";
     export let paragraph = "Welcome to the 0L Token Bridge! It's possible to swap between various other blockchain tokens to 0L using this bridge.";
-
 </script>
 
 <div>

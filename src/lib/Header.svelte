@@ -30,7 +30,7 @@
     width:100%;
     background-color:white;
     border-bottom: 1px solid lightgray;
-    /*padding:10px 0 10px 0;*/
+    padding:10px 0 10px 0;
 }
 img {
     width:40px;
@@ -50,19 +50,32 @@ h1 {
 
 
 <script>
+    import { connected_account, connect_account_type, bridge_tab_selected} from './stores.js';
+    
     import { navigateTo } from 'svelte-router-spa'
     import logo from '/icon.jpg';
     export let current_tab_focus = "/bridge";
     import ConnectWalletButton from './ConnectWalletButton.svelte'
+    let main_logo_navigation_directs_to = "/bridge/tokens";
 
-    
+    bridge_tab_selected.subscribe(function(value) {
+        if (value == "tokens") {
+            main_logo_navigation_directs_to = "/bridge/tokens";
+        } else if (value == "nfts") {
+            main_logo_navigation_directs_to = "/bridge/nfts";
+
+        } else if (value == "redeems") {
+            main_logo_navigation_directs_to = "/bridge/redeems";
+        }
+    });
+
     function check_header_tabs(e) { 
         let these_tabs = document.querySelectorAll("#header-tabs .header-tab");
         for (var i = 0; i < these_tabs.length; i++) {
             these_tabs[i].classList.remove("header-tab-selected");
         }
         if (e.srcElement.getAttribute("data-typeid") == "bridge") {
-            navigateTo("/bridge/tokens");
+            navigateTo(main_logo_navigation_directs_to);
         } else {
             e.srcElement.classList.add("header-tab-selected");
             navigateTo(e.srcElement.getAttribute("data-typeid"));
@@ -70,19 +83,17 @@ h1 {
     }
 </script>
 
-<div style="position:fixed;width:100%;">
-    <div class="main-header">
-        <div class="normal-flex">
-            <img on:click = { check_header_tabs } data-typeid="bridge" src={logo} alt="0L Logo" class="cursor"/>
-            <h1 on:click = { check_header_tabs } data-typeid="bridge"class="cursor" >0L Bridge</h1>
-        </div>
-        <div id="header-tabs" class="normal-flex">
-            <!--<div on:click = { check_header_tabs } data-typeid="bridge" class="header-tab {current_tab_focus=="/bridge"?"header-tab-selected":""}">Bridge</div>-->
-            <div on:click = { check_header_tabs } data-typeid="faq" class="header-tab {current_tab_focus=="/faq"?"header-tab-selected":""}">FAQ</div>
-            <div on:click = { check_header_tabs } data-typeid="explorer" class="header-tab {current_tab_focus=="/explorer"?"header-tab-selected":""}">Explorer</div>
-            <div on:click = { check_header_tabs } data-typeid="discord" class="header-tab {current_tab_focus=="/discord"?"header-tab-selected":""}">Discord</div>
-            <ConnectWalletButton />
-        </div>
-        
+<div class="main-header">
+    <div class="normal-flex">
+        <img on:click = { check_header_tabs } data-typeid="bridge" src={logo} alt="0L Logo" class="cursor"/>
+        <h1 on:click = { check_header_tabs } data-typeid="bridge"class="cursor" >0L Bridge</h1>
     </div>
+    <div id="header-tabs" class="normal-flex">
+        <!--<div on:click = { check_header_tabs } data-typeid="bridge" class="header-tab {current_tab_focus=="/bridge"?"header-tab-selected":""}">Bridge</div>-->
+        <div on:click = { check_header_tabs } data-typeid="faq" class="header-tab {current_tab_focus=="/faq"?"header-tab-selected":""}">FAQ</div>
+        <div on:click = { check_header_tabs } data-typeid="explorer" class="header-tab {current_tab_focus=="/explorer"?"header-tab-selected":""}">Explorer</div>
+        <div on:click = { check_header_tabs } data-typeid="discord" class="header-tab {current_tab_focus=="/discord"?"header-tab-selected":""}">Discord</div>
+        <ConnectWalletButton />
+    </div>
+    
 </div>

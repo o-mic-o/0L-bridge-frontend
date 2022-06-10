@@ -32,10 +32,23 @@
 </div>
 
 <script>
+    import { connected_account, connect_account_type, bridge_tab_selected} from './stores.js';
     import { navigateTo } from 'svelte-router-spa'
-    let type_currently_selected = "tokens";
+    export let type_currently_selected = "tokens";
     export let current_tab_focus;
-   
+    
+    update_bridge_tab_selected_store("init");
+
+    function update_bridge_tab_selected_store(type) {
+        bridge_tab_selected.update(function(current_value) {
+            if (type == "init") {
+                return current_tab_focus.split("/bridge/")[1];
+            } else if (type == "check_tab") {
+                return type_currently_selected;
+            }
+        });
+    };
+    
     function check_bridge_tabs(e) { 
         // Handles tab switching and assigning current type selected
 
@@ -46,6 +59,7 @@
         }
 
         type_currently_selected = e.srcElement.getAttribute("data-typeid");
+        update_bridge_tab_selected_store("check_tab");
         e.srcElement.classList.add("tab-selected");
         navigateTo("/bridge/" + e.srcElement.getAttribute("data-typeid"));
     }

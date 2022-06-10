@@ -82,6 +82,9 @@
     --itemHoverBG: #e7f9ff;
     --itemIsActiveColor: black;
     --inputFontSize: 18px;
+    --height:60px;
+    --indicatorTop:18px;
+    --zIndex:-1;
   }
   .chain-type-container img {
     width:40px;
@@ -106,7 +109,7 @@
   }
   .chain-type-selection-container input {
     margin-top:20px;
-    padding:12px;
+    padding:18px;
     border-radius: 10px;
     border:1px solid lightgray;
     width:515px;
@@ -120,12 +123,12 @@
     align-items: center;
     justify-content: center;
     background-color:#dadada;
-    padding:3px;
+    padding:10px;
     border-radius: 10px;
-    width:150px;
+    width:130px;
     position: absolute;
-    right:4px;
-    top:25px;
+    right:-3px;
+    top:28px;
     z-index: 1;
     cursor: pointer;
   }
@@ -134,6 +137,24 @@
   }
   .err {
     color:rgb(255, 52, 52)!important;
+  }
+  .select-maximum-type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    background-color:tomato;
+    padding:7px;
+    border-radius: 10px;
+    width:60px;
+    position: absolute;
+    right:150px;
+    top:31px;
+    z-index: 1;
+    cursor: pointer;
+  }
+  .select-maximum-type:hover {
+    opacity: 0.8;
   }
 </style>
 
@@ -153,7 +174,9 @@
           <div class="label-inner label-asset">Asset</div>
           <div style="position:relative;">
             <input on:input={handle_ava_input} type="text" placeholder="0.00">
+            <div class="select-maximum-type select-maximum-type-ava">Max</div>
             <div class="select-token-type select-token-type-ava">Select Token <Chevron /></div>
+            
             <div class="asset-estimations">
               <div class="estimations">~$0.00</div>
               <div class="estimations">Available balance: ---</div>

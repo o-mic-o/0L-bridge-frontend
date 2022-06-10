@@ -16,15 +16,16 @@
 .connect-button:hover {
     background-color: rgb(252, 127, 105);
 }
-.connect-container {
-    border:1px solid lightgray  ;
-    width:400px;
-    background:white;
-    z-index: 1;
+#connect-container {
+    border:1px solid lightgray;
+    width:405px;
+   
+    background-color:white;
     position:absolute;
-    top:60px;
+    top:78px;
     right:15px;
     border-radius: 20px;
+    z-index: 99999;
 }
 .hide {
     display:none;
@@ -73,6 +74,8 @@
     --itemHoverBG: #e7f9ff;
     --itemIsActiveColor: black;
     --inputFontSize: 18px;
+    --height:60px;
+    --indicatorTop:18px;
   }
   .chain-type-container img {
     width:40px;
@@ -106,7 +109,7 @@
         <div class="divider"></div>
         
         <div class="chain-type-container">
-            <Select {items} showChevron={true} on:select={handleSelect} inputStyles="cursor:pointer;" placeholder="Select network..."></Select>
+            <Select isSearchable={true} {items} showChevron={true} on:select={handleSelect} inputStyles="cursor:pointer;z-index:9;" placeholder="Select network..."></Select>
         </div>
         
         <div class="chain-divider divider hide"></div>
