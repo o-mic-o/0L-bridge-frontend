@@ -5,3 +5,12 @@ export const connect_account_type = writable("");
 export const connected_account_address = writable("");
 export const bridge_tab_selected = writable("");
 
+export const ol_network_tokens = writable({
+    "ol":99.9753,
+    "eth":1.25
+});
+
+export const ava_network_tokens = writable({
+    "ol":15.4555582,
+    "eth":0.3114
+});
