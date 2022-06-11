@@ -60,7 +60,23 @@
     --placeholderColor:black;
     --indicatorColor:black;
   }
-
+  .select-token-type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#dadada;
+    padding:10px;
+    border-radius: 10px;
+    width:130px;
+    position: absolute;
+    right:-3px;
+    top:28px;
+    z-index: 1;
+    cursor: pointer;
+  }
+  .select-token-type:hover {
+    background-color:#e7f9ff;
+  }
 </style>
 <div class="chain-type-selection-container hide {selection_container_type}">
 
@@ -70,8 +86,8 @@
         <div style="position:relative;">
         <input on:input={handle_this_type_input} type="text" placeholder="0.00">
         <MaxButton this_max_button_process={(e) => incoming_max_button_process(e)} current_type={select_maximum_type}/>
-
-        <Select containerClasses="select-token-type {select_token_type}" items={to_select_token_items_ol} showChevron={true} on:select={handle_this_token_select} on:clear={handle_this_token_clear} inputStyles="cursor:pointer;" placeholder="Select Token"></Select>
+        <div on:click={handle_this_token_display_select} class="{select_token_title} select-token-type">Select Token <Chevron /></div>
+        <!--<Select containerClasses="select-token-type {select_token_type}" items={to_select_token_items_ol} showChevron={true} on:select={handle_this_token_select} on:clear={handle_this_token_clear} inputStyles="cursor:pointer;" placeholder="Select Token"></Select>-->
 
         <div class="asset-estimations">
             <div class="estimations">~$0.00</div>
@@ -88,19 +104,18 @@
 
 <script>
     export let selection_container_type;
-    export let select_token_type;
     export let select_maximum_type;
     export let is_enabled;
     export let incoming_max_button_process;
     export let handle_this_type_input;
     export let selection_container_available_balance;
-    export let handle_this_token_select;
-    export let handle_this_token_clear;
+    export let handle_this_token_display_select;
+    export let select_token_title;
 
     export let is_false_message = "This network support is coming soon!";
     import MaxButton from './MaxButton.svelte';
     import Select from 'svelte-select';
-    
+    import Chevron from './ChevronAsset.svelte';
 
     let to_select_token_items_ol = [
         {value: 'ol', label: '<img src="/icon.jpg" style="width:20px;padding-right:5px;" alt="0L Logo"/>0L'},

@@ -19,7 +19,6 @@
 #connect-container {
     border:1px solid lightgray;
     width:405px;
-   
     background-color:white;
     position:absolute;
     top:78px;

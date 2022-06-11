@@ -94,95 +94,108 @@
     font-size:14px;
     margin:12px 0 12px 0;
   }
+
 </style>
 
 <div>
-  <div class="bridge-form reverse">
-    <div class="label label-from">From</div>
+  <div class="bridge-main-container">
+    <div class="bridge-form reverse">
+      <div class="label label-from">From</div>
 
-    <div class="chain-type-container">
-        <Select {items} showChevron={true} on:select={handleSelect} inputStyles="cursor:pointer;" placeholder="Select network..."></Select>
-        
-   
-          <BridgeSelectionContainer
-            handle_this_type_input={(e) => handle_default_inputs(e)}
-            selection_container_type="ava-selection-container"
-            select_token_type="select-token-type-ava"
-            select_maximum_type="select-maximum-type-ava"
-            selection_container_available_balance="selection-estimate-available-ava"
-            is_enabled={true}
-            incoming_max_button_process={ava_max_button_process}
-            handle_this_token_select={handle_ava_select}
-            handle_this_token_clear={handle_ava_clear}
-          />
-
-          <BridgeSelectionContainer
-            handle_this_type_input={(e) => null } 
-            selection_container_type="eth-selection-container" 
-            select_token_type="select-token-type-sol" 
-            select_maximum_type="select-maximum-type-eth" 
-            selection_container_available_balance="selection-estimate-available-eth"
-            is_enabled={false} 
-            is_false_message="Ethereum support is coming soon!"
-            incoming_max_button_process={function(){}};
-            handle_this_token_select={function(){}}
-            handle_this_token_clear={function(){}}
-          />
-
-          <BridgeSelectionContainer
-            handle_this_type_input={(e) => null } 
-            selection_container_type="sol-selection-container"
-            select_token_type="select-token-type-sol"
-            select_maximum_type="select-maximum-type-sol"
-            selection_container_available_balance="selection-estimate-available-sol"
-            is_enabled={false}
-            is_false_message="Solana support is coming soon!"
-            incoming_max_button_process={function(){}};
-            handle_this_token_select={function(){}}
-            handle_this_token_clear={function(){}}
-          />
-
-    </div>
-
-    <div class="label label-reverse-from hide">Destination</div>
-    <div class="divider"><img on:click={reverse_direction} class="switcher" alt="Switcher icon" src={switcher}></div>
-    <div class="label label-to">Destination</div>
+      <div class="chain-type-container">
+          <Select {items} showChevron={true} on:select={handleSelect} inputStyles="cursor:pointer;" placeholder="Select network..."></Select>
           
-    <div class="chain-type-container">
+    
+            <BridgeSelectionContainer
+              handle_this_type_input={(e) => handle_default_inputs(e)}
+              selection_container_type="ava-selection-container"
+              select_maximum_type="select-maximum-type-ava"
+              selection_container_available_balance="selection-estimate-available-ava"
+              select_token_title="select-token-title-ava"
+              is_enabled={true}
+              incoming_max_button_process={ava_max_button_process}
+              handle_this_token_display_select={handle_ava_token_display_select}
+            />
+
+            <BridgeSelectionContainer
+              handle_this_type_input={(e) => null } 
+              selection_container_type="eth-selection-container" 
+              select_maximum_type="select-maximum-type-eth" 
+              selection_container_available_balance="selection-estimate-available-eth"
+              select_token_title="select-token-title-eth"
+              is_enabled={false} 
+              is_false_message="Ethereum support is coming soon!"
+              incoming_max_button_process={function(){}};
+              handle_this_token_display_select={function(){}}
+            />
+
+            <BridgeSelectionContainer
+              handle_this_type_input={(e) => null } 
+              selection_container_type="sol-selection-container"
+              select_maximum_type="select-maximum-type-sol"
+              selection_container_available_balance="selection-estimate-available-sol"
+              select_token_title="select-token-title-sol"
+              is_enabled={false}
+              is_false_message="Solana support is coming soon!"
+              incoming_max_button_process={function(){}};
+              handle_this_token_display_select={function(){}}
+            />
+
+      </div>
+
+      <div class="label label-reverse-from hide">Destination</div>
+      <div class="divider"><img on:click={reverse_direction} class="switcher" alt="Switcher icon" src={switcher}></div>
+      <div class="label label-to">Destination</div>
+            
+      <div class="chain-type-container">
 
 
-      <Select items={to_items} value={to_selected} showChevron={true} on:select={handleToSelect} inputStyles="cursor:pointer;" placeholder="Select the network to connect to..."></Select>
+        <Select items={to_items} value={to_selected} showChevron={true} on:select={handleToSelect} inputStyles="cursor:pointer;" placeholder="Select the network to connect to..."></Select>
 
-      <BridgeSelectionContainer
-        handle_this_type_input={(e) => handle_default_inputs(e)}
-        selection_container_type="ol-selection-container"
-        selection_container_available_balance="selection-estimate-available-ol"
-        select_token_type="select-token-type-ol"
-        select_maximum_type="select-maximum-type-ol"
-        handle_this_token_select={handle_ol_select}
-        is_enabled={true}
-        incoming_max_button_process={ol_max_button_process}
-        handle_this_token_clear={handle_ol_clear}
-      />
+        <BridgeSelectionContainer
+          handle_this_type_input={(e) => handle_default_inputs(e)}
+          selection_container_type="ol-selection-container"
+          selection_container_available_balance="selection-estimate-available-ol"
+          select_maximum_type="select-maximum-type-ol"
+          select_token_title="select-token-title-ol"
+          handle_this_token_display_select={handle_ol_token_display_select}
+          is_enabled={true}
+          incoming_max_button_process={ol_max_button_process}
+        />
 
+      </div>
+
+      <div class="label label-reverse-to hide">From</div>
     </div>
-
-    <div class="label label-reverse-to hide">From</div>
+    
+    <div class="asset-estimations">
+        <div class="estimations">Estimated total including fees</div>
+        <div class="estimations">0.00</div>
+    </div>
+    <button disabled on:click={is_submitting}>Transfer</button>
+    
   </div>
   
-  <div class="asset-estimations">
-      <div class="estimations">Estimated total including fees</div>
-      <div class="estimations">0.00</div>
-  </div>
-  <button disabled on:click={is_submitting}>Transfer</button>
+  <BridgeTokenSelectionDisplayContainer
+    incoming_token_type="0L Network"
+    incoming_token_type_container="ol-token-select-container"
+    incoming_token_select_items={to_select_token_items_ol}
+    incoming_token_select_process={handle_ol_select}
+  />
+  <BridgeTokenSelectionDisplayContainer
+    incoming_token_type="AVA Network"
+    incoming_token_type_container="ava-token-select-container"
+    incoming_token_select_items={to_select_token_items_ava}
+    incoming_token_select_process={handle_ava_select}
+  />
 </div>
-
 <script>
     import switcher from '/switcher.png';
     import Select from 'svelte-select';
     import BridgeSelectionContainer from './BridgeSelectionContainer.svelte';
+    import BridgeTokenSelectionDisplayContainer from './BridgeTokenSelectionDisplayContainer.svelte';
     import { ava_network_tokens, ol_network_tokens } from './stores.js';
-
+    let chevronSvg = '<div class="inner-select-chevron"><svg width="100%" height="100%" viewBox="0 0 20 20" focusable="false" aria-hidden="true" class="s-322NloBWXWsQ"><path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z" class="s-322NloBWXWsQ"></path></svg></div>';
     let from_selected = "";
     let is_reversed = true;
 
@@ -197,12 +210,23 @@
     let to_items = [
         {value: 'ol', label: '<img src="/icon.jpg" style="width:20px;padding-right:5px;" alt="0L Logo"/>0L Network'}
     ];
+
     let to_selected = to_items[0];
 
-    function handleToSelect(event) {
+    function handleToSelect(event) {};
 
-    };
-    
+    let to_select_token_items_ol = [
+        {value: 'ol', symbol:"OL", icon: '<img src="/icon.jpg" style="width:20px;padding-right:5px;" alt="0L Logo"/>', label: "0L Token (0L)"},
+        {value: 'eth', symbol: "ETH", icon: '<img src="/eth_logo.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>', label: "Ethereum (ETH)"},
+        {value: 'usdc', symbol: "USDC", icon: '<img src="/usdc.png" style="width:20px;padding-right:5px;" alt="USDC Logo"/>', label: "US Dollar Token (USDC)"},
+      ];
+
+      let to_select_token_items_ava = [
+        {value: 'ol', symbol:"aOL", icon: '<img src="/icon.jpg" style="width:20px;padding-right:5px;" alt="0L Logo"/>', label: "0L Token (a0L)"},
+        {value: 'ava', symbol: "AVA", icon: '<img src="/ava.png" style="width:20px;padding-right:5px;" alt="AVA Logo"/>', label: "Avalanche (AVA)"},
+        {value: 'usdc', symbol: "aUSDC", icon: '<img src="/usdc.png" style="width:20px;padding-right:5px;" alt="USDC Logo"/>', label: "US Dollar Token (aUSDC)"},
+      ];
+
     function handleSelect(event) {
         console.log('selected item', event.detail.value);
         from_selected = event.detail.value;
@@ -329,35 +353,67 @@
 
   };
 
-  function ol_max_button_process(e) {
-    console.log("ol clicked on max");
+    function ol_max_button_process(e) {
+      console.log("ol clicked on max");
 
-    ol_network_tokens.subscribe(function(value) {
-      let this_ol_input = q(".ol-selection-container input");
-      if (current_ol_token_selection_is == "") {}
-      else {
-        if (this_ol_input.value == value[current_ol_token_selection_is]) {
-          q(".ol-selection-container input").value = "";
-        } else {
-          console.log(current_ol_token_selection_is);
-          q(".ol-selection-container input").value = value[current_ol_token_selection_is];
+      ol_network_tokens.subscribe(function(value) {
+        let this_ol_input = q(".ol-selection-container input");
+        if (current_ol_token_selection_is == "") {}
+        else {
+          if (this_ol_input.value == value[current_ol_token_selection_is]) {
+            q(".ol-selection-container input").value = "";
+          } else {
+            console.log(current_ol_token_selection_is);
+            q(".ol-selection-container input").value = value[current_ol_token_selection_is];
+          }
+        }
+      });
+    };
+
+    function get_this_token_select_item(from_items, value_to_find) {
+      for (var i = 0; i < from_items.length; i++) {
+        if (value_to_find == from_items[i].value) {
+          return from_items[i];
         }
       }
-    });
-  };
-
+    };
+    function handle_ol_token_display_select(e) {
+        console.log("Handling token Display select OL");
+        q(".bridge-main-container").classList.add("hide");
+        q(".ava-token-select-container").classList.add("hide");
+        q(".ol-token-select-container").classList.remove("hide");
+    };
+    function handle_ava_token_display_select(e) {
+        console.log("Handling token Display select AVA");
+        q(".bridge-main-container").classList.add("hide");
+        q(".ol-token-select-container").classList.add("hide");
+        q(".ava-token-select-container").classList.remove("hide");
+    };
     function handle_ol_select(e) {
-        console.log("Input change on inner OL");
-        current_ol_token_selection_is = e.detail.value;
-        
-        ol_network_tokens.subscribe(function(value) {
-          q(".selection-estimate-available-ol").innerHTML = "Available balance: " + value[current_ol_token_selection_is];
-        });
+      let this_selection = e.target.getAttribute("data-type_id");
+      current_ol_token_selection_is = this_selection;
+      
+      q(".bridge-main-container").classList.remove("hide");
+      q(".ol-token-select-container").classList.add("hide");
+
+      let this_token_selection = get_this_token_select_item(to_select_token_items_ol, this_selection);
+      q(".select-token-title-ol").innerHTML = this_token_selection.icon + this_token_selection.symbol + chevronSvg;
+
+      ol_network_tokens.subscribe(function(value) {
+        q(".selection-estimate-available-ol").innerHTML = "Available balance: " + value[current_ol_token_selection_is];
+      });
     };
     
     function handle_ava_select(e) {
       console.log("Input change on inner ava");
-      current_ava_token_selection_is = e.detail.value;
+      let this_selection = e.target.getAttribute("data-type_id");
+      current_ava_token_selection_is = this_selection;
+
+      q(".bridge-main-container").classList.remove("hide");
+      q(".ava-token-select-container").classList.add("hide");
+
+      let this_token_selection = get_this_token_select_item(to_select_token_items_ava, this_selection);
+      q(".select-token-title-ava").innerHTML = this_token_selection.icon + this_token_selection.symbol + chevronSvg;
 
       ava_network_tokens.subscribe(function(value) {
         console.log(value);
@@ -371,9 +427,9 @@
       q(".ava-selection-container input").value = "";
     };
 
-    function handle_ol_clear(event){ 
+    /*function handle_ol_clear(event){ 
       current_ol_token_selection_is = "";
       q(".selection-estimate-available-ol").innerHTML = "Available balance: ---";
       q(".ol-selection-container input").value = "";
-    };
+    };*/
 </script>
