@@ -4,7 +4,7 @@
     font-size: inherit;
     padding: 1em 2em;
     color: white;
-    background-color: #ed9a9a;
+    background-color: tomato;
     border-radius: 2em;
     border: 2px solid rgba(255, 62, 0, 0);
     outline: none;
@@ -172,7 +172,7 @@
         <div class="estimations">Estimated total including fees</div>
         <div class="estimations">0.00</div>
     </div>
-    <button disabled on:click={is_submitting}>Transfer</button>
+    <button on:click={is_submitting}>Transfer</button>
     
   </div>
   
@@ -194,7 +194,9 @@
     import Select from 'svelte-select';
     import BridgeSelectionContainer from './BridgeSelectionContainer.svelte';
     import BridgeTokenSelectionDisplayContainer from './BridgeTokenSelectionDisplayContainer.svelte';
-    import { ava_network_tokens, ol_network_tokens } from './stores.js';
+    import { bridge_form_state, ava_network_tokens, ol_network_tokens } from './stores.js';
+import { subscribe } from 'svelte/internal';
+
     let chevronSvg = '<div class="inner-select-chevron"><svg width="100%" height="100%" viewBox="0 0 20 20" focusable="false" aria-hidden="true" class="s-322NloBWXWsQ"><path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z" class="s-322NloBWXWsQ"></path></svg></div>';
     let from_selected = "";
     let is_reversed = true;
@@ -230,6 +232,23 @@
     function handleSelect(event) {
         console.log('selected item', event.detail.value);
         from_selected = event.detail.value;
+
+        bridge_form_state.update(function(current_value) {
+          return {
+            from: is_reversed ? event.detail.value : "ol",
+            to: is_reversed? "ol" : event.detail.value,
+            
+            from_network_token: current_value.from_network_token,
+
+            from_network_amount: current_value.from_network_amount,
+          };
+        });
+
+       bridge_form_state.subscribe(function(value) {
+          console.log("This selected item state value");
+          console.log(value);
+        });
+
         if (event.detail.value == "eth") {
           q(".eth-selection-container").classList.remove("hide");
           q(".ava-selection-container").classList.add("hide");
@@ -256,6 +275,11 @@
     }
 
   function is_submitting() {
+
+    bridge_form_state.subscribe(function(value) {
+      console.log("This form submission");
+      console.log(value);
+    });
     alert("Submitted!");
   }
 
@@ -275,7 +299,7 @@
         q(".sol-selection-container").classList.remove("hide");
       }
   };
-  function transfer_from_dispaly_switch() {
+  function transfer_from_display_switch() {
     if (from_selected == "ava") {
         q(".ava-selection-container").classList.remove("hide");
       }
@@ -288,9 +312,28 @@
   };
 
   function reverse_direction() {
+    handle_ava_clear();
+    handle_ol_clear();
 
     let this_bridge_form = q(".bridge-form");
     if (this_bridge_form.classList.contains("reverse")) { // Then it's a transfer from OL
+      
+      bridge_form_state.update(function(current_value) {
+          return {
+            from: "ol",
+            to: from_selected,
+            
+            from_network_token: "",
+            from_network_amount: "",
+          };
+      });
+
+      bridge_form_state.subscribe(function(value) {
+          console.log("This form flipped");
+          console.log(value);
+      });
+
+
       is_reversed = false;
       this_bridge_form.classList.remove("reverse");
       
@@ -309,7 +352,22 @@
     } else { // Then it's a transfer to 0L 
       this_bridge_form.classList.add("reverse");
       is_reversed = true;
+      
+      bridge_form_state.update(function(current_value) {
+          return {
+            from: from_selected,
+            to: "ol",
+            
+            from_network_token: (from_selected == "" ? "" : current_value.from_network_token),
+            from_network_amount: "",
+          };
+      });
 
+      bridge_form_state.subscribe(function(value) {
+          console.log("This form flipped");
+          console.log(value);
+      });
+       
       q(".label-from").classList.remove("hide");
       q(".label-to").classList.remove("hide");
 
@@ -318,7 +376,7 @@
 
       q(".ol-selection-container").classList.add("hide");
       hide_selection_containers();
-      transfer_from_dispaly_switch();
+      transfer_from_display_switch();
 
     }
   };
@@ -379,25 +437,48 @@
     };
     function handle_ol_token_display_select(e) {
         console.log("Handling token Display select OL");
+        q(".bridge-tabs-container").classList.add("hide");
         q(".bridge-main-container").classList.add("hide");
         q(".ava-token-select-container").classList.add("hide");
         q(".ol-token-select-container").classList.remove("hide");
     };
     function handle_ava_token_display_select(e) {
         console.log("Handling token Display select AVA");
+        q(".bridge-tabs-container").classList.add("hide");
         q(".bridge-main-container").classList.add("hide");
         q(".ol-token-select-container").classList.add("hide");
         q(".ava-token-select-container").classList.remove("hide");
     };
+
     function handle_ol_select(e) {
+      q(".ol-selection-container input").value = "";
       let this_selection = e.target.getAttribute("data-type_id");
       current_ol_token_selection_is = this_selection;
       
+      q(".bridge-tabs-container").classList.remove("hide");
       q(".bridge-main-container").classList.remove("hide");
       q(".ol-token-select-container").classList.add("hide");
 
       let this_token_selection = get_this_token_select_item(to_select_token_items_ol, this_selection);
       q(".select-token-title-ol").innerHTML = this_token_selection.icon + this_token_selection.symbol + chevronSvg;
+
+       
+      bridge_form_state.update(function(current_value) {
+          return {
+            from: current_value.from,
+            to:  current_value.to,
+            
+            from_network_token: (current_value.from == "ol" ? this_selection : current_value.from_network_token),
+
+            from_network_amount: current_value.from_network_amount,
+          };
+      });
+
+      bridge_form_state.subscribe(function(value) {
+          console.log("This ol token was selected");
+          console.log(value);
+      });
+       
 
       ol_network_tokens.subscribe(function(value) {
         q(".selection-estimate-available-ol").innerHTML = "Available balance: " + value[current_ol_token_selection_is];
@@ -405,31 +486,71 @@
     };
     
     function handle_ava_select(e) {
+      q(".ava-selection-container input").value = "";
+
       console.log("Input change on inner ava");
       let this_selection = e.target.getAttribute("data-type_id");
       current_ava_token_selection_is = this_selection;
 
+      q(".bridge-tabs-container").classList.remove("hide");
       q(".bridge-main-container").classList.remove("hide");
       q(".ava-token-select-container").classList.add("hide");
 
       let this_token_selection = get_this_token_select_item(to_select_token_items_ava, this_selection);
       q(".select-token-title-ava").innerHTML = this_token_selection.icon + this_token_selection.symbol + chevronSvg;
+       
 
+      bridge_form_state.update(function(current_value) {
+          return {
+            from: current_value.from,
+            to:  current_value.to,
+            
+            from_network_token: (current_value.from == "ava" ? current_ava_token_selection_is : current_value.from_network_token),
+
+            from_network_amount: current_value.from_network_amount,
+          };
+      });
+
+      bridge_form_state.subscribe(function(value) {
+          console.log("This ava token was selected");
+          console.log(value);
+      });
+       
       ava_network_tokens.subscribe(function(value) {
         console.log(value);
           q(".selection-estimate-available-ava").innerHTML = "Available balance: " + value[current_ava_token_selection_is];
       });
     };
 
-    function handle_ava_clear(event) {
+    function handle_ava_clear() {
       current_ava_token_selection_is = "";
       q(".selection-estimate-available-ava").innerHTML = "Available balance: ---";
       q(".ava-selection-container input").value = "";
+      q(".select-token-title-ava").innerHTML = "Select Token";
+      bridge_form_state.update(function(current_value) {
+          return {
+            from: current_value.from,
+            to:  current_value.to,
+            
+            from_network_token: "",
+            from_network_amount: "",
+          };
+      });
     };
 
-    /*function handle_ol_clear(event){ 
+    function handle_ol_clear(){ 
       current_ol_token_selection_is = "";
       q(".selection-estimate-available-ol").innerHTML = "Available balance: ---";
       q(".ol-selection-container input").value = "";
-    };*/
+      q(".select-token-title-ol").innerHTML = "Select Token";
+      bridge_form_state.update(function(current_value) {
+          return {
+            from: current_value.from,
+            to:  current_value.to,
+            
+            from_network_token: "",
+            from_network_amount: "",
+          };
+      });
+    };
 </script>

@@ -8,6 +8,7 @@
         background-color:#f5f0f0;
         padding:3px;
     }
+
     .bridge-tabs-container div {
         padding:10px 30px 10px 30px;
         border-radius: 99px;

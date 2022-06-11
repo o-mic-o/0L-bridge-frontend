@@ -16,3 +16,11 @@ export const ava_network_tokens = writable({
     "ava":0.3114,
     "usdc":120.25
 });
+
+export const bridge_form_state = writable({
+    from: "",
+    to: "ol",
+    
+    from_network_token: "",
+    from_network_amount: "",
+})

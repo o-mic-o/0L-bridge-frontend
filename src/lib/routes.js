@@ -6,7 +6,7 @@ import DiscordContainer from './DiscordContainer.svelte';
 import NotFoundError from './NotFoundError.svelte';
 
 const routes = [
-  { name: '/', redirectTo: "/bridge" },
+  { name: '/', redirectTo: "/bridge/tokens" },
   { name: 'faq', component: FaqContainer },
   { name: 'explorer', component: ExplorerContainer },
   { name: 'discord', component: DiscordContainer },
