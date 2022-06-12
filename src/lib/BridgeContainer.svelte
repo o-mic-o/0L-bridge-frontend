@@ -2,6 +2,8 @@
     import Introduction from './Introduction.svelte'
     import BridgeTabs from './BridgeTabs.svelte'
     import BridgeForm from './BridgeForm.svelte'
+    import BridgeNftsForm from './BridgeNftsForm.svelte';
+    import BridgeRedeemsForm from './BridgeRedeemsForm.svelte';
     import Header from './Header.svelte'
     import { Route, navigateTo} from 'svelte-router-spa'
 
@@ -15,7 +17,9 @@
         <div>
             <Introduction />
             <BridgeTabs current_tab_focus={currentRoute.path}/>
-            <BridgeForm />
+            <BridgeForm current_tab_focus={currentRoute.path} />
+            <BridgeNftsForm current_tab_focus={currentRoute.path} />
+            <BridgeRedeemsForm current_tab_focus={currentRoute.path} />
         </div>
 </main>
 

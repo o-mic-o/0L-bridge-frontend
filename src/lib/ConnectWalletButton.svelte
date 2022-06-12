@@ -143,6 +143,7 @@
         </div>    
 
     </div>
+    <EthereumConnector bind:load_balances_for_ethereum={load_balances_for_ethereum}/>
 </div>
 
 <script>
@@ -156,10 +157,17 @@
     import ava_logo from "/ava.png";
     import sol_logo from "/sol.png";
     import Select from 'svelte-select';
+    import EthereumConnector from './EthereumConnector.svelte';
 
+    let load_connection_locally_once = true;
+    let WAIT_FOR_LOAD_TIME = 100;
+
+    let load_balances_for_ethereum; //From EthereumConnector
+
+    //Mapping for chainIds, icon_logo, name for connect_account_type in store.
     let chain_id_mapping = [
-        ["0x1", "eth_logo"],
-        ["0xa86a", "ava"]
+        ["0x1", "eth_logo.png", "eth"],
+        ["0xa86a", "ava.png", "ava"]
     ];
 
     let items = [
@@ -168,12 +176,29 @@
         {value: 'solana', label: '<img src="/sol.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Solana'},
     ];
     
-    parse_local_store();
+    wait_for_ethereum_load();
 
+    function wait_for_ethereum_load() {
+        setTimeout(function(){
+            let was_found = false;
+            if (typeof window.ethereum != 'undefined' && window.ethereum.selectedAddress) {
+                if (typeof window.web3.currentProvider != 'undefined') {  
+                    parse_local_store();  
+                    loading_web3_process();
+                    was_found = true;
+                }
+            }
+            if (!was_found) {
+                wait_for_ethereum_load();
+            }
+        },WAIT_FOR_LOAD_TIME);
+    };
+   
+  
     function parse_local_store() {
         is_connected_account.subscribe(function(is_connect){
             if (is_connect) {
-                loading_web3_process(); 
+                loading_web3_process();
             }
         });
     };
@@ -208,17 +233,22 @@
     async function loading_web3_process() {
         if (typeof window.ethereum != 'undefined' && window.ethereum.selectedAddress) {
             if (typeof window.web3.currentProvider != 'undefined') {    
+
                 for (var i=0; i < chain_id_mapping.length; i++) {
                     if (window.web3.currentProvider.chainId == chain_id_mapping[i][0]) {
-                        load_metmask_as_title(chain_id_mapping[i][1]);
-                        connect_account_type.update(function(value) {
-                            return chain_id_mapping[i][1];
-                        });
-                        is_connected_account.update(function(value_is){
-                            return true;
-                        });
+                        if (load_connection_locally_once) {
+                            load_metmask_as_title(chain_id_mapping[i][1]);
+                            connect_account_type.update(function(value) {
+                                return chain_id_mapping[i][2];
+                            });
+                            is_connected_account.update(function(value_is){
+                                return true;
+                            });
+                            load_connection_locally_once = false;
+                        }
                     }
                 }
+
             }
         }
 
@@ -238,16 +268,21 @@
         }
     };
 
+    
+
     async function load_metmask_as_title(type) {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         const account = accounts[0];
+        
 
         connected_account_address.update(function(value){
             return account;
         });
+        
+        load_balances_for_ethereum();
 
         q("#connect-button").classList.add("connect-button-flex");
-        q("#connect-button-logo").innerHTML = '<img src="/'+type+'.png" alt="Metmask Logo" style="width:20px;padding-right:10px;"/>';
+        q("#connect-button-logo").innerHTML = '<img src="/'+type+'" alt="Metmask Logo" style="width:20px;padding-right:10px;"/>';
         q("#connect-button-logo").classList.remove("hide");
         q("#connect-button-text").classList.add("truncate-address");
         q("#connect-button-text").innerHTML = account;
@@ -256,7 +291,7 @@
     async function connect_metamask() {
         if (typeof window.ethereum !== 'undefined') {
             console.log('MetaMask is installed!');
-            load_metmask_as_title("eth_logo");
+            load_metmask_as_title("eth_logo.png");
             q("#connect-container").classList.add("hide");
         }
     }
@@ -278,7 +313,7 @@
                 method: 'wallet_addEthereumChain',
                 params: [AVALANCHE_MAINNET_PARAMS]
             }).then(() => {
-                load_metmask_as_title("ava");
+                load_metmask_as_title("ava.png");
                 q("#connect-button").click();
             });
         }

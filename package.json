@@ -10,9 +10,12 @@
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
+    "keccak256": "^1.0.6",
     "svelte": "^3.44.0",
     "svelte-select": "^4.4.7",
-    "vite": "^2.9.9"
+    "svelte-web3": "^3.4.2",
+    "vite": "^2.9.9",
+    "web3": "^1.7.3"
   },
   "dependencies": {
     "svelte-router-spa": "^6.0.3"

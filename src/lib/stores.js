@@ -16,6 +16,12 @@ export const ava_network_tokens = writable({
     "ava":0.3114,
     "usdc":120.25
 });
+export const eth_network_tokens = writable({
+    "ol":175.3325,
+    "eth":0,
+    "usdc":255.8443,
+    "dai":75.00
+});
 
 export const bridge_form_state = writable({
     from: "",

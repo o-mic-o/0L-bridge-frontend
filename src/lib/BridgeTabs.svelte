@@ -37,21 +37,40 @@
     import { navigateTo } from 'svelte-router-spa'
     export let type_currently_selected = "tokens";
     export let current_tab_focus;
-    
+    function q(incoming){ return document.querySelector(incoming); };
+
     update_bridge_tab_selected_store("init");
 
     function update_bridge_tab_selected_store(type) {
         bridge_tab_selected.update(function(current_value) {
             if (type == "init") {
+                
                 return current_tab_focus.split("/bridge/")[1];
             } else if (type == "check_tab") {
                 return type_currently_selected;
             }
         });
     };
-    
+
+    function handle_displaying_selected_components() {
+        if (type_currently_selected == "tokens") {
+            q(".bridge-main-container").classList.remove("hide");
+            q(".bridge-nfts-main-container").classList.add("hide");
+            q(".bridge-redeems-main-container").classList.add("hide");
+        } else if (type_currently_selected == "nfts") {
+            q(".bridge-main-container").classList.add("hide");
+            q(".bridge-redeems-main-container").classList.add("hide");
+            q(".bridge-nfts-main-container").classList.remove("hide");
+        } else if (type_currently_selected == "redeems") {
+            q(".bridge-main-container").classList.add("hide");
+            q(".bridge-redeems-main-container").classList.remove("hide");
+            q(".bridge-nfts-main-container").classList.add("hide");
+        }
+    };
+
     function check_bridge_tabs(e) { 
         // Handles tab switching and assigning current type selected
+        // Handles switching between the bridge component visibility
 
         let these_tabs = document.querySelectorAll("#bridge-tabs .inner-tab");
         
@@ -62,6 +81,10 @@
         type_currently_selected = e.srcElement.getAttribute("data-typeid");
         update_bridge_tab_selected_store("check_tab");
         e.srcElement.classList.add("tab-selected");
+        
+        handle_displaying_selected_components();
+
+
         navigateTo("/bridge/" + e.srcElement.getAttribute("data-typeid"));
     }
 </script>
