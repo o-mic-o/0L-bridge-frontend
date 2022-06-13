@@ -66,7 +66,7 @@
     {#each incoming_token_select_items as item}
       <div on:click={incoming_token_select_process} class="chain-token-container" data-type_id={item.value}>
         {@html item.icon}
-        <div class="token-type">{item.label}</div>
+        <div class="token-type" data-type_id={item.value}>{item.label}</div>
     </div>
     {/each}
 

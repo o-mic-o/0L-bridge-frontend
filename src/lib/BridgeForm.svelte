@@ -235,21 +235,21 @@
     function handleToSelect(event) {};
 
     let to_select_token_items_ol = [
-        {value: 'ol', symbol:"OL", icon: '<img src="/icon.jpg" style="width:20px;padding-right:5px;" alt="0L Logo"/>', label: "0L Token (0L)"},
-        {value: 'eth', symbol: "ETH", icon: '<img src="/eth_logo.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>', label: "Ethereum (ETH)"},
-        {value: 'usdc', symbol: "USDC", icon: '<img src="/usdc.png" style="width:20px;padding-right:5px;" alt="USDC Logo"/>', label: "US Dollar Token (USDC)"},
+        {value: 'ol', symbol:"OL", icon: '<img data-type_id="ol" src="/icon.jpg" style="width:20px;padding-right:5px;" alt="0L Logo"/>', label: "0L Token (0L)"},
+        {value: 'eth', symbol: "ETH", icon: '<img data-type_id="eth" src="/eth_logo.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>', label: "Ethereum (ETH)"},
+        {value: 'usdc', symbol: "USDC", icon: '<img data-type_id="usdc" src="/usdc.png" style="width:20px;padding-right:5px;" alt="USDC Logo"/>', label: "US Dollar Token (USDC)"},
     ];
       let to_select_token_items_eth = [
-      {value: 'ol', symbol:"eOL", icon: '<img src="/icon.jpg" style="width:20px;padding-right:5px;" alt="0L Logo"/>', label: "0L Token (e0L)"},
-      {value: 'eth', symbol: "ETH", icon: '<img src="/eth_logo.png" style="width:20px;padding-right:5px;" alt="AVA Logo"/>', label: "Ethereum (ETH)"},
-      {value: 'usdc', symbol: "USDC", icon: '<img src="/usdc.png" style="width:20px;padding-right:5px;" alt="USDC Logo"/>', label: "US Dollar Token (USDC)"},
-      {value: 'dai', symbol: "DAI", icon: '<img src="/dai.png" style="width:20px;padding-right:5px;" alt="DAI Logo"/>', label: "DAI Token (DAI)"},
+      {value: 'ol', symbol:"eOL", icon: '<img data-type_id="ol" src="/icon.jpg" style="width:20px;padding-right:5px;" alt="0L Logo"/>', label: "0L Token (e0L)"},
+      {value: 'eth', symbol: "ETH", icon: '<img data-type_id="eth" src="/eth_logo.png" style="width:20px;padding-right:5px;" alt="AVA Logo"/>', label: "Ethereum (ETH)"},
+      {value: 'usdc', symbol: "USDC", icon: '<img data-type_id="usdc" src="/usdc.png" style="width:20px;padding-right:5px;" alt="USDC Logo"/>', label: "US Dollar Token (USDC)"},
+      {value: 'dai', symbol: "DAI", icon: '<img data-type_id="dai" src="/dai.png" style="width:20px;padding-right:5px;" alt="DAI Logo"/>', label: "DAI Token (DAI)"},
     ];
 
     let to_select_token_items_ava = [
-      {value: 'ol', symbol:"aOL", icon: '<img src="/icon.jpg" style="width:20px;padding-right:5px;" alt="0L Logo"/>', label: "0L Token (a0L)"},
-      {value: 'ava', symbol: "AVA", icon: '<img src="/ava.png" style="width:20px;padding-right:5px;" alt="AVA Logo"/>', label: "Avalanche (AVA)"},
-      {value: 'usdc', symbol: "aUSDC", icon: '<img src="/usdc.png" style="width:20px;padding-right:5px;" alt="USDC Logo"/>', label: "US Dollar Token (aUSDC)"},
+      {value: 'ol', symbol:"aOL", icon: '<img data-type_id="ol" src="/icon.jpg" style="width:20px;padding-right:5px;" alt="0L Logo"/>', label: "0L Token (a0L)"},
+      {value: 'ava', symbol: "AVA", icon: '<img data-type_id="ava" src="/ava.png" style="width:20px;padding-right:5px;" alt="AVA Logo"/>', label: "Avalanche (AVA)"},
+      {value: 'usdc', symbol: "aUSDC", icon: '<img data-type_id="usdc" src="/usdc.png" style="width:20px;padding-right:5px;" alt="USDC Logo"/>', label: "US Dollar Token (aUSDC)"},
     ];
 
     function handleSelect(event) {
@@ -561,6 +561,7 @@
     };
 
     function handle_eth_select(e) {
+      console.log(e);
       q(".eth-selection-container input").value = "";
 
       console.log("Input change on inner eth");
@@ -571,6 +572,7 @@
       q(".bridge-main-container").classList.remove("hide");
       q(".eth-token-select-container").classList.add("hide");
 
+      console.log(this_selection);
       let this_token_selection = get_this_token_select_item(to_select_token_items_eth, this_selection);
       q(".select-token-title-eth").innerHTML = this_token_selection.icon + this_token_selection.symbol + chevronSvg;
        
