@@ -50,7 +50,11 @@
   .token-select-container.hide {
     display:none;
   }
-
+  @media screen and (max-width:700px) {
+    .token-select-container {
+      width:350px;
+    }
+  }
 </style>
 
 <div class="token-select-container {incoming_token_type_container} hide">

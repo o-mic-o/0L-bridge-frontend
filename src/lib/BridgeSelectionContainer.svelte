@@ -77,6 +77,11 @@
   .select-token-type:hover {
     background-color:#e7f9ff;
   }
+  @media screen and (max-width:700px) {
+    .chain-type-selection-container input {
+      width:295px;
+    }
+  }
 </style>
 <div class="chain-type-selection-container hide {selection_container_type}">
 
