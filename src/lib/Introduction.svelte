@@ -18,7 +18,14 @@
   div {
     padding-bottom:25px;
   }
-
+  @media screen and (max-width:700px) {
+    .intro {
+     padding:0 10px 25px 10px;
+    }
+    .intro h1 {
+      font-size:3rem;
+    }
+  }
 </style>
 
 <script>
@@ -27,7 +34,7 @@
     export let paragraph = "Welcome to the 0L Token Bridge! It's possible to swap between various other blockchain tokens to 0L using this bridge.";
 </script>
 
-<div>
+<div class="intro">
   <h1>{title}</h1>
   <p>{paragraph}</p>
 </div>

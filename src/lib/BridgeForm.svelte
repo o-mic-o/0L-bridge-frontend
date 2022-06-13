@@ -92,6 +92,19 @@
     font-size:14px;
     margin:12px 0 12px 0;
   }
+  @media screen and (max-width:700px) {
+
+    .chain-type-container {
+      width:auto;
+      padding:25px 10px 60px 10px;
+    }
+    button {
+      width:90%;
+    }
+    .bridge-form {
+      width:350px;
+    }
+  }
 
 </style>
 
@@ -414,9 +427,32 @@
       else {
         if (this_eth_input.value == value[current_eth_token_selection_is]) {
           q(".eth-selection-container input").value = "";
+          bridge_form_state.update(function(current_value) {
+                return {
+                  from: current_value.from,
+                  to:  current_value.to,
+                  from_network_token: current_value.from_network_token,
+                  from_network_amount:  "",
+                };
+            });
         } else {
           q(".eth-selection-container input").value = value[current_eth_token_selection_is];
+
+            bridge_form_state.update(function(current_value) {
+                return {
+                  from: current_value.from,
+                  to:  current_value.to,
+                  from_network_token: (current_value.from == "eth" ? current_eth_token_selection_is : current_value.from_network_token),
+                  from_network_amount:  (current_value.from == "eth" ? this_eth_input.value : ""),
+                };
+            });
         }
+
+        bridge_form_state.subscribe(function(value) {
+            console.log("This eth token was maxxed");
+            console.log(value);
+        });
+
       }
     });
   };
@@ -545,7 +581,7 @@
             to:  current_value.to,
             
             from_network_token: (current_value.from == "eth" ? current_eth_token_selection_is : current_value.from_network_token),
-            from_network_amount: current_value.from_network_amount,
+            from_network_amount:  (current_value.from == "eth" ? q(".eth-selection-container input").value : ""),
           };
       });
 

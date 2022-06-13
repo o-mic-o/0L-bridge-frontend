@@ -46,6 +46,15 @@ h1 {
 .cursor {
     cursor: pointer;
 }
+
+@media screen and (max-width:700px) {
+   
+    .header-tab {
+        margin-left:2px;
+        margin-right:2px;
+        display:none;
+    }
+}
 </style>
 
 

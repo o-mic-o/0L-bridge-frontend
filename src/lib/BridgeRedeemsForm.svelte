@@ -14,6 +14,11 @@
     text-align: center;
     color:#bfbebe;
 }
+@media screen and (max-width:700px) {
+    .bridge-form-redeems {
+    width:350px;
+    }
+}
 </style>
 <div>
     <div class="{current_tab_focus=="/bridge/redeems" ? "" : "hide"} bridge-redeems-main-container">

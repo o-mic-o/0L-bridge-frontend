@@ -24,6 +24,11 @@
     .inner-tab:hover {
         background-color:white;
     }
+    @media screen and (max-width:700px) {
+        .bridge-tabs-container {
+            width:90%;
+        }
+    }
 </style>
 
 <div id="bridge-tabs" class="bridge-tabs-container">

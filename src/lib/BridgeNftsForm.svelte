@@ -14,6 +14,12 @@
     text-align: center;
     color:#bfbebe;
 }
+@media screen and (max-width:700px) {
+    .bridge-form-nfts {
+    width:350px;
+    }
+}
+
 </style>
 <div>
     <div class="{current_tab_focus=="/bridge/nfts" ? "" : "hide"} bridge-nfts-main-container">

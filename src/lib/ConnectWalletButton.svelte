@@ -93,7 +93,15 @@
     align-items: center;
     justify-content: center;
   }
-
+  @media screen and (max-width:700px) {
+    #connect-container {
+        width:95%;
+    }
+    .chain-type-container {
+        width:90%;
+    }
+  
+  }
 </style>
 
 <div style="display:relative;">
@@ -101,7 +109,7 @@
         <div id="connect-button-logo" class="hide">
            
         </div>
-        <div id="connect-button-text">Connect Wallet</div>
+        <div id="connect-button-text">Connect</div>
     </div>
     <div id="connect-container" class="connect-container hide">
         <div class="connect-title">Connect Wallet</div>
