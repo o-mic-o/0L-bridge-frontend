@@ -9,6 +9,7 @@
 <main>
     <Route {currentRoute} />
     <Header current_tab_focus={currentRoute.path} />
+    
     <div>
         <Introduction title="FAQ" paragraph="This is the FAQ section..."/>
     </div>

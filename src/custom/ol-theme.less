@@ -1,0 +1,110 @@
+@import "../../node_modules/uikit/src/less/uikit.theme.less";
+
+@global-link-color: tomato;
+@global-gray-color: #bfbebe;
+@global-light-gray-border: lightgray;
+@header-background:white;
+
+body {
+    font-family: 'CircularStd-Medium';
+}
+.hide {
+    display:none;
+}
+.uk-navbar-container:not(.uk-navbar-transparent) {
+    background:@header-background;
+    border-bottom:1px solid @global-light-gray-border;
+}
+
+.uk-tab {
+    margin:0 20px 0 0;
+}
+.uk-logo, .uk-logo:hover {
+    color:@global-link-color;
+    font-weight:700;
+    font-size:32px;
+    font-family: 'CircularStd-Bold';
+}
+.uk-logo img {
+    width:40px;
+}
+.uk-navbar-item {
+    min-height: 70px;
+}
+.uk-tab > * > a {
+    text-transform: none;
+    color: @global-gray-color;
+    font-size:16px;
+    padding:15px 10px 15px 10px;
+}
+
+.uk-tab > .uk-active > a, .uk-tab > * > a:hover {
+    border-color: @global-link-color;
+    border-width: 2px;
+    color:@global-link-color;
+}
+
+.uk-tab::before {
+    border-bottom:none;
+}
+
+.uk-offcanvas-bar {
+    background: white;
+    border:1px solid @global-link-color;
+}
+.uk-offcanvas-bar a{
+    color:@global-link-color;
+    border-bottom:1px solid transparent;
+}
+.uk-offcanvas-bar a:hover {
+    color: @global-link-color;
+    border-bottom: 1px solid @global-link-color;
+}
+
+
+
+// Introduction and grid inside
+.uk-grid + .uk-grid-small {
+    margin-top:0;
+}
+.uk-card-body {
+    padding-bottom:0;
+}
+.uk-card-body h1 {
+    color:@global-link-color;
+    font-weight: 700;
+    font-size:3.5rem;
+    font-family: 'CircularStd-Bold';
+}
+p {
+    color:@global-gray-color;
+}
+
+.sub-container{
+    padding:0;
+}
+
+.label {
+    padding:30px 0 30px 0px;
+    font-size:16px;
+    font-weight: 600;
+    text-align: center;
+    color:#bfbebe;
+}
+
+//Bridge Form
+.asset-estimations{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:0 30px 0 10px;
+}
+.bridge-form-sub {
+    margin-top:15px;
+}
+.inner-chevron {
+    width:20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

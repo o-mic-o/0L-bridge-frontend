@@ -24,14 +24,7 @@
     font-weight: 600;
     text-align: left;
   }
-   
 
-  .asset-estimations{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding:0 10px 0 10px;
-  }
   .estimations {
     color:#888888;
     display:flex;
@@ -77,15 +70,13 @@
   .select-token-type:hover {
     background-color:#e7f9ff;
   }
-  @media screen and (max-width:700px) {
+  @media screen and (max-width:960px) {
     .chain-type-selection-container input {
       width:90%;
     }
     .select-token-type {
       padding:10px 0 10px 0;
       font-size:16px;
-      top:30px;
-      right:43px;
     }
   }
 </style>

@@ -14,27 +14,23 @@
 <main>
     <Route {currentRoute} />
     <Header current_tab_focus={currentRoute.path} />
-        <div>
-            <Introduction />
-            <BridgeTabs current_tab_focus={currentRoute.path}/>
-            <BridgeForm current_tab_focus={currentRoute.path} />
-            <BridgeNftsForm current_tab_focus={currentRoute.path} />
-            <BridgeRedeemsForm current_tab_focus={currentRoute.path} />
-        </div>
+    <div class="uk-grid-small uk-child-width-1-4@s uk-flex-center uk-text-center" uk-grid>
+      <Introduction />
+    </div>
+    <div class="uk-grid-small uk-child-width-1-4@s uk-flex-center uk-text-center" uk-grid>
+      <BridgeTabs current_tab_focus={currentRoute.path}/>
+    </div>
+    <div class="uk-grid-small uk-flex-center uk-text-center" uk-grid>
+      <BridgeForm current_tab_focus={currentRoute.path} />
+    </div>
+    <div class="uk-grid-small uk-child-width-1-4@s uk-flex-center uk-text-center" uk-grid>
+      <BridgeNftsForm current_tab_focus={currentRoute.path} />
+    </div>
+    <div class="uk-grid-small uk-child-width-1-4@s uk-flex-center uk-text-center" uk-grid>
+      <BridgeRedeemsForm current_tab_focus={currentRoute.path} />
+    </div>
 </main>
 
 <style>
-    div {
-    display:flex;
-    align-items:center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  main {
-    font-family: 'CircularStd-Medium';
-    text-align: center;
-    padding: 0;
-    margin:0 auto;
-    padding-bottom:100px;
-  }
+  
 </style>

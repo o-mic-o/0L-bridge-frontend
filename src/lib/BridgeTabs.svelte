@@ -7,6 +7,7 @@
         justify-content: space-between;
         background-color:#f5f0f0;
         padding:3px;
+        margin-top:15px;
     }
 
     .bridge-tabs-container div {
@@ -30,8 +31,7 @@
         }
     }
 </style>
-
-<div id="bridge-tabs" class="bridge-tabs-container">
+<div id="bridge-tabs" class="bridge-tabs-container uk-card-body uk-text-center">
     <div on:click={check_bridge_tabs} data-typeid="tokens" class="inner-tab {current_tab_focus=="/bridge/tokens"?"tab-selected":""}">Tokens</div>
     <div on:click={check_bridge_tabs} data-typeid="nfts" class="inner-tab {current_tab_focus=="/bridge/nfts"?"tab-selected":""}">NFTs</div>
     <div on:click={check_bridge_tabs} data-typeid="redeems" class="inner-tab {current_tab_focus=="/bridge/redeems"?"tab-selected":""}">Redeems</div>

@@ -10,16 +10,16 @@
     width:60px;
     position: absolute;
     right:188px;
-    top:31px;
+    top:30px;
     z-index: 1;
     cursor: pointer;
   }
   .select-maximum-type:hover {
     opacity: 0.8;
   }
-  @media screen and (max-width:700px) {
+  @media screen and (max-width:960px) {
     .select-maximum-type{
-      right:177px;
+      right:167px;
     }
   }
 </style>

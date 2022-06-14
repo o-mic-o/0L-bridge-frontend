@@ -1,12 +1,4 @@
 
-<style>
-  :root {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
-
-</style>
-
 <div>
   <Toasts />
   <Router {routes} />
@@ -14,12 +6,14 @@
 
 
 <script>
+  import 'uikit';
+  import './assets/fonts.css';
+  import "./custom/ol-theme.less";
   import { addToast, connected_account_address, is_connected_account, connect_account_type, bridge_tab_selected} from './lib/stores.js';
   import { routes } from './lib/routes.js'
   import { Router } from 'svelte-router-spa'
   import Toasts from "./lib/Toasts.svelte";
 
-  import './assets/fonts.css';
 
   bridge_tab_selected.subscribe(function(value) {
     console.log(value);

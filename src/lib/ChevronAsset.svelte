@@ -1,10 +1,5 @@
 <style>
-    .inner-chevron {
-        width:20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+
 </style>
 <div class="inner-chevron">
     <svg width="100%" height="100%" viewBox="0 0 20 20" focusable="false" aria-hidden="true" class="s-322NloBWXWsQ"><path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747

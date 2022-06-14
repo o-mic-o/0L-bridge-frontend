@@ -1,6 +1,12 @@
 <style>
+.connect-button-container {
+    display:relative;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+}
 .connect-button {
-    padding:10px 20px 10px 20px;
+    padding:8px 20px 8px 20px;
     background-color:tomato;
     color:white;
     border-radius: 30px;
@@ -21,8 +27,8 @@
     width:405px;
     background-color:white;
     position:absolute;
-    top:78px;
-    right:15px;
+    top:75px;
+    right:5px;
     border-radius: 20px;
     z-index: 99999;
 }
@@ -93,10 +99,10 @@
     align-items: center;
     justify-content: center;
   }
-  @media screen and (max-width:700px) {
+  @media screen and (max-width:960px) {
     #connect-container {
         width:100%;
-        top:63px;
+        top:85px;
         right:0;
     }
     .chain-type-container {
@@ -106,7 +112,7 @@
   }
 </style>
 
-<div style="display:relative;">
+<div class="connect-button-container">
     <div on:click={connect_button_process} id="connect-button" data-typeid="connect" class="connect-button connect-button-flex">
         <div id="connect-button-logo" class="hide">
            
