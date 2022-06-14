@@ -5,14 +5,12 @@
     import BridgeNftsForm from './BridgeNftsForm.svelte';
     import BridgeRedeemsForm from './BridgeRedeemsForm.svelte';
     import Header from './Header.svelte'
-    import { Route, navigateTo} from 'svelte-router-spa'
 
   export let currentRoute;
   //navigateTo("/bridge/tokens");
 </script>
 
 <main>
-    <Route {currentRoute} />
     <Header current_tab_focus={currentRoute.path} />
     <div class="uk-grid-small uk-child-width-1-4@s uk-flex-center uk-text-center" uk-grid>
       <Introduction />
@@ -30,7 +28,3 @@
       <BridgeRedeemsForm current_tab_focus={currentRoute.path} />
     </div>
 </main>
-
-<style>
-  
-</style>
