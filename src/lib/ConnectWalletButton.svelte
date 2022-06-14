@@ -7,7 +7,7 @@
 }
 .connect-button {
     padding:8px 20px 8px 20px;
-    background-color:tomato;
+    background-color:#ff5958;
     color:white;
     border-radius: 30px;
     margin-right:15px;
@@ -20,7 +20,7 @@
     justify-content: center;
 }
 .connect-button:hover {
-    background-color: rgb(252, 127, 105);
+    background-color: #fe7676;
 }
 #connect-container {
     border:1px solid lightgray;

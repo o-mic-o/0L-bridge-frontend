@@ -13,7 +13,7 @@
     .bridge-tabs-container div {
         padding:10px 30px 10px 30px;
         border-radius: 99px;
-        color:tomato;
+        color:#ff5958;
         font-weight: 500;
     }
     .bridge-tabs-container div.tab-selected {

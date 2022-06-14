@@ -28,3 +28,9 @@
       <BridgeRedeemsForm current_tab_focus={currentRoute.path} />
     </div>
 </main>
+
+<style>
+  main {
+    padding-bottom:100px;
+  }
+</style>

@@ -50,7 +50,7 @@
     }
     .info {
       background:white;
-      border:1px solid tomato;
+      border:1px solid #ff5958;
       border-radius: 20px;
     }
     .text {
