@@ -25,11 +25,6 @@
     .inner-tab:hover {
         background-color:white;
     }
-    @media screen and (max-width:700px) {
-        .bridge-tabs-container {
-            width:90%;
-        }
-    }
 </style>
 <div id="bridge-tabs" class="bridge-tabs-container uk-card-body uk-text-center">
     <div on:click={check_bridge_tabs} data-typeid="tokens" class="inner-tab {current_tab_focus=="/bridge/tokens"?"tab-selected":""}">Tokens</div>

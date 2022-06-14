@@ -10,10 +10,10 @@
 }
 .chain-type-selection-container input {
     margin-top:20px;
-    padding:18px 14px 18px 14px;
+    padding:18px 18px 18px 18px;
     border-radius: 10px;
     border:1px solid lightgray;
-    width:515px;
+    width: calc(100% - 65px);
     font-size:18px;
     color:black;
     font-weight: 600;
@@ -58,27 +58,19 @@
     align-items: center;
     justify-content: center;
     background-color:#dadada;
-    padding:10px;
+    padding:10px 5px 10px 5px;
     border-radius: 10px;
     width:130px;
     position: absolute;
-    right:33px;
-    top:28px;
+    left: calc(100% - 130px - 43px);
+    top:26px;
     z-index: 1;
     cursor: pointer;
   }
   .select-token-type:hover {
     background-color:#e7f9ff;
   }
-  @media screen and (max-width:960px) {
-    .chain-type-selection-container input {
-      width:90%;
-    }
-    .select-token-type {
-      padding:10px 0 10px 0;
-      font-size:16px;
-    }
-  }
+
 </style>
 <div class="chain-type-selection-container hide {selection_container_type}">
 
@@ -86,15 +78,15 @@
 
         <div class="label-inner">Asset</div>
         <div style="position:relative;">
-        <input on:input={handle_this_type_input} type="text" placeholder="0.00">
-        <MaxButton this_max_button_process={(e) => incoming_max_button_process(e)} current_type={select_maximum_type}/>
-        <div on:click={handle_this_token_display_select} class="{select_token_title} select-token-type">Select Token <Chevron /></div>
-        <!--<Select containerClasses="select-token-type {select_token_type}" items={to_select_token_items_ol} showChevron={true} on:select={handle_this_token_select} on:clear={handle_this_token_clear} inputStyles="cursor:pointer;" placeholder="Select Token"></Select>-->
+          <input on:input={handle_this_type_input} type="text" placeholder="0.00">
+          <MaxButton this_max_button_process={(e) => incoming_max_button_process(e)} current_type={select_maximum_type}/>
+          <div on:click={handle_this_token_display_select} class="{select_token_title} select-token-type">Select Token <Chevron /></div>
+          <!--<Select containerClasses="select-token-type {select_token_type}" items={to_select_token_items_ol} showChevron={true} on:select={handle_this_token_select} on:clear={handle_this_token_clear} inputStyles="cursor:pointer;" placeholder="Select Token"></Select>-->
 
-        <div class="asset-estimations">
-            <div class="estimations">~$0.00</div>
-            <div class="estimations {selection_container_available_balance}">Available balance: ---</div>
-        </div>
+          <div class="asset-estimations">
+              <div class="estimations">~$0.00</div>
+              <div class="estimations {selection_container_available_balance}">Available balance: ---</div>
+          </div>
         </div>
 
     {:else}

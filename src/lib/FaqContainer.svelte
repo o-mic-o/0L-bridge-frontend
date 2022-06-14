@@ -1,15 +1,8 @@
 <script>
     import Introduction from './Introduction.svelte'
-    import Header from './Header.svelte'
-    import { Route } from 'svelte-router-spa'
-
-    export let currentRoute;
 </script>
 
-<main>
-    <Route {currentRoute} />
-    <Header current_tab_focus={currentRoute.path} />
-    
+<main>    
     <div>
         <Introduction title="FAQ" paragraph="This is the FAQ section..."/>
     </div>

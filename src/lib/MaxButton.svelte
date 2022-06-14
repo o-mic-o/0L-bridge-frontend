@@ -9,19 +9,20 @@
     border-radius: 10px;
     width:60px;
     position: absolute;
-    right:188px;
+    left: calc(100% - 250px);
     top:30px;
     z-index: 1;
     cursor: pointer;
   }
+
   .select-maximum-type:hover {
     opacity: 0.8;
   }
+
   @media screen and (max-width:960px) {
-    .select-maximum-type{
-      right:167px;
-    }
+
   }
+  
 </style>
 
 <script>

@@ -1,5 +1,6 @@
 
 <div>
+  <Header current_tab_focus={routes.path} />
   <Toasts />
   <Router {routes} />
 </div>
@@ -13,6 +14,8 @@
   import { routes } from './lib/routes.js'
   import { Router } from 'svelte-router-spa'
   import Toasts from "./lib/Toasts.svelte";
+  export let currentRoute;
+  import Header from './lib/Header.svelte'
 
 
   bridge_tab_selected.subscribe(function(value) {

@@ -51,7 +51,9 @@ body {
 
 .uk-offcanvas-bar {
     background: white;
-    border:1px solid @global-link-color;
+    border:1px solid @global-gray-color;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 .uk-offcanvas-bar a{
     color:@global-link-color;
@@ -83,9 +85,6 @@ p {
     color:@global-gray-color;
 }
 
-.sub-container{
-    padding:0;
-}
 
 .label {
     padding:30px 0 30px 0px;
@@ -102,16 +101,21 @@ p {
     justify-content: space-between;
     padding:0 30px 0 10px;
 }
-.bridge-form-sub {
-    margin-top:15px;
-}
+
 .inner-chevron {
     width:20px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
+@media screen and (max-width:700px) {
+    .bridges-container  {
+        padding:15px;
+    }
+    #bridge-tabs.bridge-tabs-container {
+        width: 340px;
+    }
+}
 
 //Connector
 .truncate-address{

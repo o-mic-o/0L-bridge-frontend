@@ -35,6 +35,6 @@
     import {navigateTo} from 'svelte-router-spa';
 
     function nav_to_main_bridge() {
-        navigateTo("/bridge/tokens");
+        navigateTo("/bridge");
     };
 </script>

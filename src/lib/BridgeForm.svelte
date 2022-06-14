@@ -97,7 +97,7 @@
       padding:25px 10px 60px 10px;
     }
     button {
-      width:90%;
+      width:100%;
     }
     .bridge-form {
       width:100%;

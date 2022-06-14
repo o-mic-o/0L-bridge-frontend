@@ -1,14 +1,8 @@
 <script>
     import Introduction from './Introduction.svelte'
-    import Header from './Header.svelte'
-    import { Route } from 'svelte-router-spa'
-    export let currentRoute;
-    console.log(currentRoute);
 </script>
 
 <main>
-    <Route {currentRoute} />
-    <Header current_tab_focus={currentRoute.path} />
     <div>
         <Introduction title="Explorer" paragraph="This is the Explorer page..."/>
     </div>
