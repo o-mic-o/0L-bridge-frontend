@@ -31,6 +31,8 @@
     background-color:white;
     border-bottom: 1px solid lightgray;
     padding:10px 0 10px 0;
+    position: fixed;
+    z-index: 9;
 }
 img {
     width:40px;
@@ -48,10 +50,17 @@ h1 {
 }
 
 @media screen and (max-width:700px) {
-   
+    .header-title {
+        font-size:24px;
+    }
     .header-tab {
         margin-left:2px;
         margin-right:2px;
+        display:none;
+    }
+}
+@media screen and (max-width:380px) {
+    .header-title{
         display:none;
     }
 }
@@ -95,7 +104,7 @@ h1 {
 <div class="main-header">
     <div class="normal-flex">
         <img on:click = { check_header_tabs } data-typeid="bridge" src={logo} alt="0L Logo" class="cursor"/>
-        <h1 on:click = { check_header_tabs } data-typeid="bridge"class="cursor" >0L Bridge</h1>
+        <h1 on:click = { check_header_tabs } data-typeid="bridge"class="cursor header-title" >0L Bridge</h1>
     </div>
     <div id="header-tabs" class="normal-flex">
         <!--<div on:click = { check_header_tabs } data-typeid="bridge" class="header-tab {current_tab_focus=="/bridge"?"header-tab-selected":""}">Bridge</div>-->

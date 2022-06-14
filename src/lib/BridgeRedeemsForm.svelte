@@ -16,11 +16,14 @@
 }
 @media screen and (max-width:700px) {
     .bridge-form-redeems {
-    width:350px;
+        width:100%;
+    }
+    .redeems-container {
+        width:100%;
     }
 }
 </style>
-<div>
+<div class="redeems-container">
     <div class="{current_tab_focus=="/bridge/redeems" ? "" : "hide"} bridge-redeems-main-container">
         <div class="bridge-form-redeems reverse">
             <div class="label">Redeems coming soon!</div>

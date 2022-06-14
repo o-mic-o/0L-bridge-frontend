@@ -18,9 +18,12 @@
   div {
     padding-bottom:25px;
   }
+  .intro {
+    padding-top:75px;
+  }
   @media screen and (max-width:700px) {
     .intro {
-     padding:0 10px 25px 10px;
+     padding:50px 10px 25px 10px;
     }
     .intro h1 {
       font-size:3rem;

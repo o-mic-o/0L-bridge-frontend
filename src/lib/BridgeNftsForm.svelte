@@ -16,12 +16,15 @@
 }
 @media screen and (max-width:700px) {
     .bridge-form-nfts {
-    width:350px;
+        width:100%;
+    }
+    .nfts-container {
+        width:100%;
     }
 }
 
 </style>
-<div>
+<div class="nfts-container">
     <div class="{current_tab_focus=="/bridge/nfts" ? "" : "hide"} bridge-nfts-main-container">
         <div class="bridge-form-nfts reverse">
             <div class="label">NFTs coming soon!</div>

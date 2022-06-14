@@ -52,7 +52,7 @@
   }
   @media screen and (max-width:700px) {
     .token-select-container {
-      width:350px;
+      width:100%;
     }
   }
 </style>

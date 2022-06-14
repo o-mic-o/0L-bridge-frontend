@@ -29,7 +29,7 @@
     display: flex;
     flex-direction: column-reverse;
     margin-top:25px;
-    border:2px solid #f5f0f0;
+    outline:2px solid #f5f0f0;
     width:600px;
     border-radius:30px;
   }
@@ -51,7 +51,7 @@
     font-weight: 600;
   }
   .chain-type-container{
-    width:540px;
+    width:auto;
     padding:25px 0 60px 30px;
     text-align: left;
     font-size:18px;
@@ -65,6 +65,7 @@
     --height:60px;
     --indicatorTop:18px;
     --zIndex:-1;
+    --margin:0 25px 0 0;
   }
   .chain-type-container img {
     width:40px;
@@ -93,22 +94,24 @@
     margin:12px 0 12px 0;
   }
   @media screen and (max-width:700px) {
-
+    .bridges-container{
+      width:100%;
+      margin:0;
+    }
     .chain-type-container {
-      width:auto;
       padding:25px 10px 60px 10px;
     }
     button {
       width:90%;
     }
     .bridge-form {
-      width:350px;
+      width:100%;
     }
   }
 
 </style>
 
-<div>
+<div class="bridges-container">
   <div class="{current_tab_focus=="/bridge/tokens" ? "" : "hide"} bridge-main-container">
     <div class="bridge-form reverse">
       <div class="label label-from">From</div>
@@ -210,7 +213,7 @@
     import Select from 'svelte-select';
     import BridgeSelectionContainer from './BridgeSelectionContainer.svelte';
     import BridgeTokenSelectionDisplayContainer from './BridgeTokenSelectionDisplayContainer.svelte';
-    import { bridge_form_state, eth_network_tokens, ava_network_tokens, ol_network_tokens } from './stores.js';
+    import { bridge_form_state, eth_network_tokens, ava_network_tokens, ol_network_tokens, addToast } from './stores.js';
     import { subscribe } from 'svelte/internal';
     export let current_tab_focus;
 
@@ -303,7 +306,8 @@
       console.log("This form submission");
       console.log(value);
     });
-    alert("Submitted!");
+    addToast({ message:"Starting transfer process...", type: "info", dismissible: true, timeout: 0 })
+
   }
 
   function hide_selection_containers() {

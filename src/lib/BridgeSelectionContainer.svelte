@@ -10,7 +10,7 @@
 }
 .chain-type-selection-container input {
     margin-top:20px;
-    padding:18px;
+    padding:18px 14px 18px 14px;
     border-radius: 10px;
     border:1px solid lightgray;
     width:515px;
@@ -69,7 +69,7 @@
     border-radius: 10px;
     width:130px;
     position: absolute;
-    right:-3px;
+    right:33px;
     top:28px;
     z-index: 1;
     cursor: pointer;
@@ -79,7 +79,13 @@
   }
   @media screen and (max-width:700px) {
     .chain-type-selection-container input {
-      width:295px;
+      width:90%;
+    }
+    .select-token-type {
+      padding:10px 0 10px 0;
+      font-size:16px;
+      top:30px;
+      right:43px;
     }
   }
 </style>

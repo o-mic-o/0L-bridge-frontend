@@ -9,13 +9,18 @@
     border-radius: 10px;
     width:60px;
     position: absolute;
-    right:150px;
+    right:188px;
     top:31px;
     z-index: 1;
     cursor: pointer;
   }
   .select-maximum-type:hover {
     opacity: 0.8;
+  }
+  @media screen and (max-width:700px) {
+    .select-maximum-type{
+      right:177px;
+    }
   }
 </style>
 

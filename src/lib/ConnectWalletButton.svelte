@@ -95,7 +95,9 @@
   }
   @media screen and (max-width:700px) {
     #connect-container {
-        width:95%;
+        width:100%;
+        top:63px;
+        right:0;
     }
     .chain-type-container {
         width:90%;
@@ -174,8 +176,8 @@
 
     //Mapping for chainIds, icon_logo, name for connect_account_type in store.
     let chain_id_mapping = [
-        ["0x1", "eth_logo.png", "eth"],
-        ["0xa86a", "ava.png", "ava"]
+        ["0x1", "eth_logo.png", "eth", "Ethereum on Metamask detected."],
+        ["0xa86a", "ava.png", "ava", "Avalanche on Metamask detected."]
     ];
 
     let items = [
@@ -183,7 +185,8 @@
         {value: 'ethereum', label: `<img src="/eth_logo.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Ethereum`},
         {value: 'solana', label: '<img src="/sol.png" style="width:20px;padding-right:5px;" alt="Ethereum Logo"/>Solana'},
     ];
-    
+
+
     wait_for_ethereum_load();
 
     function wait_for_ethereum_load() {
@@ -244,6 +247,7 @@
 
                 for (var i=0; i < chain_id_mapping.length; i++) {
                     if (window.web3.currentProvider.chainId == chain_id_mapping[i][0]) {
+
                         if (load_connection_locally_once) {
                             load_metmask_as_title(chain_id_mapping[i][1]);
                             connect_account_type.update(function(value) {
@@ -252,8 +256,10 @@
                             is_connected_account.update(function(value_is){
                                 return true;
                             });
+
                             load_connection_locally_once = false;
                         }
+
                     }
                 }
 
@@ -263,7 +269,7 @@
     };
 
     async function connect_button_process() {
-        loading_web3_process();
+        //loading_web3_process();
         hide_show_connect_container();
     }
     
